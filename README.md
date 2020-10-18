@@ -1,7 +1,8 @@
 # unity-photonpun2-demo
 Online Multiplayer demo using Photon PUN 2
 
-Youtube Demo: https://youtu.be/7m42uJP6TkI
+ 
+<a href="https://youtu.be/7m42uJP6TkI" target="_blank">Youtube Demo</a>
 
 
 It includes all the features that you might need for your game
@@ -13,7 +14,7 @@ It includes all the features that you might need for your game
 - Photon Chat
 Etc
 
-If you want to work with me: https://www.upwork.com/fl/michellearias2
+<a href="https://www.upwork.com/fl/michellearias2" target="_blank">If you want to work with me</a>
 
 Cheers!
 
