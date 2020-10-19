@@ -85,11 +85,7 @@ public class MultiplayerMenuManager :  MonoBehaviourPunCallbacks, IChatClientLis
 
         }
     }
-    void UpdatePing()
-    {
-        PingTxt.text = "Ping " + PhotonNetwork.GetPing() + " ms";
 
-    }
     // Clicked "Connect" button
     public void ConnectToPhoton(Text name)
     {
@@ -112,19 +108,25 @@ public class MultiplayerMenuManager :  MonoBehaviourPunCallbacks, IChatClientLis
 
     }
     #region Lobby
+
+    void UpdatePing()
+    {
+        PingTxt.text = "Ping " + PhotonNetwork.GetPing() + " ms";
+
+    }
     void UpdateLobbyStats()
     {
         TotalPlayersConnectedTxt.text = "Connected Players " + PhotonNetwork.CountOfPlayers;
         TotalPlayersInRoomTxt.text = "Players in Rooms " + PhotonNetwork.CountOfPlayersInRooms;
 
     }
-    // Matchmaking based level
+    // Matchmaking based on player's level
     public void Matchmaking()
     {
         LoadingGo.SetActive(true);
         ExitGames.Client.Photon.Hashtable expectedProperties = new ExitGames.Client.Photon.Hashtable();
         expectedProperties.Add("level", myPlayerLevel);
-
+        // it will lead to a photon callback
         PhotonNetwork.JoinRandomRoom(expectedProperties, 0);
     }
     // Disconnect from Photon
@@ -135,6 +137,18 @@ public class MultiplayerMenuManager :  MonoBehaviourPunCallbacks, IChatClientLis
         Lobby.SetActive(false);
         Menu.SetActive(true);
     }
+
+    public void ChangeUserLvl(Text lvlTxt)
+    {
+        myPlayerLevel = int.Parse(lvlTxt.text);
+        ExitGames.Client.Photon.Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties;
+        properties["level"] = myPlayerLevel;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+        CurrentUserLevelTxt.text = "User level " + myPlayerLevel.ToString();
+
+    }
+
     #endregion
     #region Room Selector
     public void EnterRoomSelector()
@@ -182,6 +196,7 @@ public class MultiplayerMenuManager :  MonoBehaviourPunCallbacks, IChatClientLis
     {
         LoadingGo.SetActive(true);
         chatClient.Unsubscribe(new string[] { PhotonNetwork.CurrentRoom.Name });
+      // Destroy UI messages
         foreach (var child in ChatMessagesGrid.GetComponentsInChildren<Transform>())
         {
             if (child.gameObject != ChatMessagesGrid.gameObject)
@@ -411,16 +426,7 @@ public class MultiplayerMenuManager :  MonoBehaviourPunCallbacks, IChatClientLis
 
 
     }
-    public void ChangeUserLvl(Text lvlTxt)
-    {
-        myPlayerLevel = int.Parse(lvlTxt.text);
-        ExitGames.Client.Photon.Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties;
-        properties["level"] = myPlayerLevel;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
-
-        CurrentUserLevelTxt.text = "User level " + myPlayerLevel.ToString();
-
-    }
+  
     private void OnLevelWasLoaded(int level)
     {
         if (level == 1)

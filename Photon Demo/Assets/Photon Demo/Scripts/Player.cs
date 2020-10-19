@@ -7,7 +7,6 @@ public class Player : MonoBehaviourPunCallbacks
 {
     public Transform ShootBase;
 
-
     public float Speed = 5f;
     public int Health = 100;
 
