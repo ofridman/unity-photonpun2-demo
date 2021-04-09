@@ -14,7 +14,7 @@ It includes all the features that you might need for your game
 - Photon Chat
 Etc
 
-<a href="https://www.upwork.com/fl/michellearias2" target="_blank">If you want to work with me</a>
+<a href="https://www.upwork.com/fl/oliverfridman" target="_blank">If you want to work with me</a>
 
 Cheers!
 
